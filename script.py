@@ -6,14 +6,12 @@ import csv
 import datetime
 import sys
 
-# open the file in the write mode
+# Open the file in the write mode
 f = open(sys.argv[1] + "-" + sys.argv[2] + "weeks.csv", 'w')
-
-# create the csv writer
-datetime.timedelta(days=10)
-date = datetime.datetime.today()
-
+# Create the csv writer
 writer = csv.writer(f)
+
+# Write headers
 writer.writerow((
     "rank", 
     "artist", 
@@ -25,10 +23,20 @@ writer.writerow((
     "isNew"
 ))
 
+# Set date to todays date
+date = datetime.datetime.today()
+
+# Loop for number of weeks specified by $2
 for i in range(int(sys.argv[2])):
+
+    # Get the chart specified by $1 for the weeek of `date`
     chart = billboard.ChartData(sys.argv[1], date=date.strftime('%Y-%m-%d'))
-    date = date - datetime.timedelta(days=7)
+
+    # Loop through the chart entries
     for chartentry in chart:
+        
+        # Put the attributes of the entry 
+        # into the correct collumns
         row = (
             chartentry.rank,
             chartentry.artist,
@@ -42,6 +50,10 @@ for i in range(int(sys.argv[2])):
 
         # write a row to the csv file
         writer.writerow(row)
+        
+    # Subtract seven days from `date` for 
+    # the next iteration of the loop
+    date = date - datetime.timedelta(days=7)
 
 # close the file
 f.close()
