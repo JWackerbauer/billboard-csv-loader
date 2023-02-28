@@ -17,10 +17,10 @@ python sript.py "chart-name" <weeks>
 ## Examples:
 - Download the last 200 weeks of billboard-200
 
-        python sript.py "billboard-200" 200
+        python script.py "billboard-200" 200
 
 - Download the last 10 weeks of hot-100
 
-        python sript.py "hot-100" 10
+        python script.py "hot-100" 10
     
 
